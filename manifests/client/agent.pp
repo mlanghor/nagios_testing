@@ -1,7 +1,7 @@
 class nagios_testing::client::agent (
-  $nrpe_group  = 'nagios',
-  $nrpe_user   = 'nagios',
-  $server_port = '5666',
+  $nrpe_group     = 'nagios',
+  $nrpe_user      = 'nagios',
+  $nrpe_port      = '5666',
   $allowed_hosts  = '172.21.12.15',
   $load_warning   = '16,17,18',
   $load_crit      = '20,22,24',
