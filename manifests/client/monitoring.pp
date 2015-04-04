@@ -19,7 +19,7 @@ class nagios_testing::client::monitoring (
     use                   => $host_template,
     check_command         => 'check-host-alive',
     parents               => 'master',
-    max_check_attepts     => '3',
+    max_check_attempts    => '3',
     register              => '1',
     contact_groups        => 'unix',
     notification_interval => '60',
