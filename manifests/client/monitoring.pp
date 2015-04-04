@@ -1,7 +1,7 @@
 class nagios_testing::client::monitoring (
   $host_template    = 'base_host',
   $service_template = 'base_service',
-  $client_basedir   = "/opt/nagios/auto_configure/${::applicationtier}/${::clientcert}"
+  $client_basedir   = "/opt/nagios/auto_configure/${::application_tier}/${::clientcert}"
 ) {
   @@file { $client_basedir:
     ensure => directory,
@@ -26,7 +26,7 @@ class nagios_testing::client::monitoring (
     notification_period   => '24x7',
     notification_options  => 'd,u,r',
     target                => "${client_basedir}/host_${::clientcert}.cfg",
-    tag                   => $::applicationtier,
+    tag                   => $::application_tier,
   }
 
   @@nagios_service { "check_ssh_${::hostname}":
@@ -38,7 +38,7 @@ class nagios_testing::client::monitoring (
     check_command       => 'check_ssh',
     service_description => 'SSH',
     target              => "${client_basedir}/${::clientcert}_check_ssh.cfg",
-    tag                 => $::applicationtier,
+    tag                 => $::application_tier,
   }
 
   @@nagios_service { "check_disk_${::hostname}":
@@ -51,7 +51,7 @@ class nagios_testing::client::monitoring (
     service_description   => 'Default Disk Space Check',
     notifications_enabled => '1',
     target                => "${client_basedir}/${::clientcert}_check_disk.cfg",
-    tag                   => $::applicationtier,
+    tag                   => $::application_tier,
   }
 
   @@nagios_service { "check_syslog_${::hostname}":
@@ -64,7 +64,7 @@ class nagios_testing::client::monitoring (
     service_description   => 'Check Syslog',
     notifications_enabled => '1',
     target                => "${client_basedir}/${::clientcert}_check_syslog.cfg",
-    tag                   => $::applicationtier,
+    tag                   => $::application_tier,
   }
 
   @@nagios_service { "check_swap_${::hostname}":
@@ -77,7 +77,7 @@ class nagios_testing::client::monitoring (
     service_description   => 'Check Swap',
     notifications_enabled => '1',
     target                => "${client_basedir}/${::clientcert}_check_swap.cfg",
-    tag                   => $::applicationtier,
+    tag                   => $::application_tier,
   }
 
   @@nagios_service { "check_dns_${::hostname}":
@@ -90,7 +90,7 @@ class nagios_testing::client::monitoring (
     service_description   => 'Check DNS',
     notifications_enabled => '1',
     target                => "${client_basedir}/${::clientcert}_check_dns.cfg",
-    tag                   => $::applicationtier,
+    tag                   => $::application_tier,
   }
 
   @@nagios_service { "check_syslog_proc_${::hostname}":
@@ -103,7 +103,7 @@ class nagios_testing::client::monitoring (
     service_description   => 'Check Syslog Proc',
     notifications_enabled => '1',
     target                => "${client_basedir}/${::clientcert}_check_syslog_proc.cfg",
-    tag                   => $::applicationtier,
+    tag                   => $::application_tier,
   }
 
   @@nagios_service { "check_zombies_${::hostname}":
@@ -116,6 +116,6 @@ class nagios_testing::client::monitoring (
     service_description   => 'Check Zombie Procs',
     notifications_enabled => '1',
     target                => "${client_basedir}/${::clientcert}_check_zombies.cfg",
-    tag                   => $::applicationtier,
+    tag                   => $::application_tier,
   }
 }
