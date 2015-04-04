@@ -34,6 +34,7 @@ class nagios_testing::server::collect {
   }
 
 
+  File <<| tag == "nagios_basedir" |>>
   Nagios_host <<| |>>
   Nagios_service <<| |>>
 }

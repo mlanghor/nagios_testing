@@ -5,10 +5,11 @@ class nagios_testing::client::monitoring (
 ) {
   @@file { $client_basedir:
     ensure => directory,
+    require => File["/opt/nagios/auto_configure/${::application_tier}"],
     owner  => 'root',
     group  => 'root',
     mode   => '2750',
-    tag    => "nagios_basedir_${::clientcert}",
+    tag    => "nagios_basedir",
   }
 
   @@nagios_host { $::fqdn:
