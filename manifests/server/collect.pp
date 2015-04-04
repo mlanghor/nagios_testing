@@ -1,4 +1,5 @@
 class nagios_testing::server::collect {
+  notice("hellooooo")
   File {
     owner => 'root',
     group => 'root',
