@@ -8,7 +8,7 @@ class nagios_testing::client::monitoring (
     require => File["/opt/nagios/auto_configure/${::application_tier}"],
     owner  => 'root',
     group  => 'root',
-    mode   => '2750',
+    mode   => '2755',
     tag    => "nagios_basedir",
   }
 
@@ -30,17 +30,17 @@ class nagios_testing::client::monitoring (
     tag                   => $::application_tier,
   }
 
-  @@nagios_service { "check_ssh_${::hostname}":
-    ensure              => present,
-    require             => File[$client_basedir],
-    use                 => $service_template,
-    host_name           => $::fqdn,
-    max_check_attempts  => '4',
-    check_command       => 'check_ssh',
-    service_description => 'SSH',
-    target              => "${client_basedir}/${::clientcert}_check_ssh.cfg",
-    tag                 => $::application_tier,
-  }
+  #  @@nagios_service { "check_ssh_${::hostname}":
+  #  ensure              => present,
+  #  require             => File[$client_basedir],
+  #  use                 => $service_template,
+  #  host_name           => $::fqdn,
+  #  max_check_attempts  => '4',
+  #  check_command       => 'check_ssh',
+  #  service_description => 'SSH',
+  #  target              => "${client_basedir}/${::clientcert}_check_ssh.cfg",
+  #  tag                 => $::application_tier,
+  #}
 
   @@nagios_service { "check_disk_${::hostname}":
     ensure                => present,
