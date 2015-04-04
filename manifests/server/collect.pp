@@ -2,7 +2,7 @@ class nagios_testing::server::collect {
   File {
     owner => 'root',
     group => 'root',
-    mode  => '2750',
+    mode  => '2755',
   }
 
   file { '/opt/nagios/auto_configure':
@@ -35,6 +35,6 @@ class nagios_testing::server::collect {
 
 
   File <<| tag == "nagios_basedir" |>>
-  #Nagios_host <<| |>>
-  #Nagios_service <<| |>>
+  Nagios_host <<| |>>
+  Nagios_service <<| |>>
 }
