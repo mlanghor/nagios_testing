@@ -1,0 +1,33 @@
+##This File is managed by Puppet, do not modify
+log_facility=daemon
+pid_file=/var/run/nrpe.pid
+server_port=<%= nrpe_port %>
+nrpe_user=<%= nrpe_user %>
+nrpe_group=<%= nrpe_group %>
+
+allowed_hosts=<%= allowed_hosts %>
+
+dont_blame_nrpe=0
+debug=0
+command_timeout=60
+connection_timeout=300
+
+include_dir=/opt/nagios/etc/host_configs
+
+command[check_users]=/opt/nagios/libexec/check_users -w 5 -c 10
+command[check_load]=/opt/nagios/libexec/check_load -w <%= load_warning %> -c <%= load_crit %>
+command[check_zombie_procs]=/opt/nagios/libexec/check_procs -w 5 -c 10 -s Z
+command[check_total_procs]=/opt/nagios/libexec/check_procs -w 150 -c 200
+command[check_disk]=/opt/nagios/libexec/check_disk -w 10% -c 5% -p /var -p / -p /export/home -p /opt -p /tmp
+command[check_syslog]=sudo /opt/nagios/libexec/check_logfiles -f /opt/nagios/etc/check_syslog.cfg
+command[check_swap]=/opt/nagios/libexec/check_swap      -w      10%     -c      5%
+command[check_ntp]=/opt/nagios/libexec/check_ntp_time   -H    <%= ntp_check_host %>  -w      .05       -c      .1
+command[check_smtp]=/opt/nagios/libexec/check_smtp      -H      localhost
+command[check_dns]=/opt/nagios/libexec/check_dns -H `hostname` -w 5 -c 10
+command[check_cpu]=/opt/nagios/libexec/check_cpu.sh     -w      95      -c      98
+command[check_memory]=/opt/nagios/libexec/check_mem.pl  -u  -C    -w      90      -c      95
+command[check_cron]=/opt/nagios/libexec/check_procs2    cron    ge      1
+command[check_inetd]=/opt/nagios/libexec/check_procs2   inetd   eq      1
+command[check_rscd]=/opt/nagios/libexec/check_procs2    rscd    ge      1
+command[check_syslog_proc]=/opt/nagios/libexec/check_procs2     syslog  ge      1
+command[check_splunkd]=/opt/nagios/libexec/check_procs2 splunkd ge      2
